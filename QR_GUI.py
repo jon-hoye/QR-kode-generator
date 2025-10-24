@@ -3,6 +3,7 @@ import tkinter as tk
 from qr0_get_matrix import get_qr_matrix
 import os
 
+os.makedirs("qr_koder", exist_ok=True)
 
 customtkinter.set_appearance_mode("dark")
 
@@ -68,10 +69,7 @@ def lagre():
     width = qr.winfo_width()
     height = qr.winfo_height()
 
-
-
     screenshot = ImageGrab.grab(bbox=(x, y, x + width, y + height))
-    os.makedirs("qr_koder", exist_ok=True)
     screenshot.save(f"qr_koder\qr_kode_{url_global}.png")
 
 
@@ -93,7 +91,7 @@ draw_qr(canvas, 25, 25, 350, ([0, 0], [0, 0]))
 
 
 
-label = customtkinter.CTkLabel(master=frametop, text="QR kode generator", font=("roboto", 24, "bold"))
+label = customtkinter.CTkLabel(master=frametop, text="QR-kode generator", font=("roboto", 24, "bold"))
 label.grid(row=0, column=1, sticky="nsew", padx=10, pady=10)
 
 
