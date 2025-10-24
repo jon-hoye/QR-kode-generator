@@ -15,6 +15,8 @@ root.geometry("700x600")
 
 root.title("QR-GEN")
 
+root.iconbitmap("icon.ico")
+
 
 
 frametop = customtkinter.CTkFrame(master=root)
