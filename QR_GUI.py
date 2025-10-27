@@ -60,6 +60,7 @@ def show_qr():
    url = entry1.get().strip()
    if url == "":
       entry1.delete(0, "end")
+      label_error.configure(text="Du må skrive inn noe")
    else:
       entry1.delete(0, "end")
       button1.configure(state="normal")
