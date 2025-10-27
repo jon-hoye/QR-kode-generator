@@ -75,6 +75,7 @@ def string_to_bit_list(content_string, qr_layout):
        error_mode = "L"
        error_corr_bytes = 10
     else:
+      return None, None
       raise ValueError("error")
     
     target_data_bytes = bytes - error_corr_bytes

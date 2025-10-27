@@ -26,6 +26,9 @@ frametop.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
 qr = customtkinter.CTkFrame(master=frametop)
 qr.grid(row=1, column=1, sticky="", padx=10, pady=10)
 
+buttons = customtkinter.CTkFrame(master=frametop)
+buttons.grid(row=3, column=1, sticky="nsew", padx=10, pady=10)
+
 
 root.grid_rowconfigure(0, weight=1)
 root.grid_columnconfigure(0, weight=1)
@@ -47,11 +50,16 @@ rowconfig_frametop()
 qr.grid_rowconfigure(0, weight=1)
 qr.grid_columnconfigure(0, weight=1)
 
+buttons.grid_rowconfigure(0, weight=1)
+buttons.grid_rowconfigure(1, weight=1)
+buttons.grid_rowconfigure(2, weight=1)
+buttons.grid_columnconfigure(0, weight=1)
+
 def show_qr():
    global url_global
-   url = entry1.get()
-   if url.strip() == "":
-      ...
+   url = entry1.get().strip()
+   if url == "":
+      entry1.delete(0, "end")
    else:
       entry1.delete(0, "end")
       button1.configure(state="normal")
@@ -61,7 +69,12 @@ def show_qr():
 
 def generate_code(url):
     qr_matrix = get_qr_matrix(url)
-    display(qr_matrix)
+
+    if qr_matrix != None:
+        label_error.configure(text="")
+        display(qr_matrix)
+    else:
+        label_error.configure(text="For lang streng")
 
 
 def lagre():
@@ -103,18 +116,21 @@ entry1 = customtkinter.CTkEntry(master=frametop, placeholder_text= "Skriv inn en
 entry1.grid(row=2, column=1, sticky="ews", padx=10, pady=5)
 
 
-button = customtkinter.CTkButton(master=frametop, text="Generer", command=show_qr, fg_color="green", font=("roboto", 12, "bold"),
+button = customtkinter.CTkButton(master=buttons, text="Generer", command=show_qr, fg_color="green", font=("roboto", 12, "bold"),
                                   corner_radius=32, width=20)
 
-button.grid(row=3, column=1, padx=10, pady=5, sticky="n")
+button.grid(row=0, column=0, padx=10, pady=5, sticky="s")
 
 
-button1 = customtkinter.CTkButton(master=frametop, text="Lagre", command=lagre, fg_color="purple", font=("roboto", 12, "bold"),
+button1 = customtkinter.CTkButton(master=buttons, text="Lagre", command=lagre, fg_color="purple", font=("roboto", 12, "bold"),
                                   corner_radius=32, width=20, state="disabled")
 
-button1.grid(row=3, column=1, padx=10, pady=5, sticky="s")
+button1.grid(row=1, column=0, padx=10, pady=5, sticky="n")
 
 
+
+label_error = customtkinter.CTkLabel(master=buttons, text="", font=("roboto", 12, "bold"))
+label_error.grid(row=2, column=0, sticky="nsew", padx=10, pady=10)
 
 
 entry1.bind("<Return>", lambda event: show_qr())
